@@ -105,3 +105,16 @@ npm install next-themes
 - When user launches the page, will see system theme first without toggling
 
 ## [Background Generator](https://www.fffuel.co/)
+
+## [Environment Variables Validation](https://env.t3.gg/docs/nextjs)
+
+```
+npm install @t3-oss/env-nextjs zod
+```
+
+-
+
+## [jiti](https://www.npmjs.com/package/jiti): doesn't work in the project
+
+- No build step needed: Load TS or ESM directly during runtime.
+- Set up in next.config.ts to validation env file in the beginning

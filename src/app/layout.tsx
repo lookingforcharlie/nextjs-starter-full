@@ -25,6 +25,7 @@ export default function RootLayout({
       <body className="h-screen w-screen">
         <Providers>
           <AppNavbar />
+          {/* Set up the background image to dark and light mode */}
           <main className="flex-grow overflow-auto bg-[url(/light-abstract.webp)] bg-cover dark:bg-[url(/dark-abstract.webp)]">
             {children}
           </main>
