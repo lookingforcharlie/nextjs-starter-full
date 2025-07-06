@@ -1,7 +1,7 @@
 # Next.JS Starter Kit Full Version
 
-- settings.json/.vscode, eslint, prettier, tailwind css, code cleanup.
-- NextUI library
+- [Inspired by](https://github.com/w3cj/next-start)
+- [Other Starters](https://gist.github.com/w3cj/4fa5180fec37ececf0fceec0e3fcc8ab)
 
 ## [Setup prettier for formatting](https://nextjs.org/docs/app/api-reference/config/eslint)
 
@@ -62,10 +62,46 @@ npm install -D prettier prettier-plugin-tailwindcss
 
 ## [Use a emoji as a favicon](https://css-tricks.com/emoji-as-a-favicon/)
 
+## Tailwind CSS V4
+
+- We don't need tailwind.config.js file no more in V4
+
 ## HeroUI
 
-```
-npm install @heroui/react framer-motion
-```
+- [How to work with Tailwind CSS V4](https://www.heroui.com/docs/guide/tailwind-v4)
+
+  ```
+  // manually installation
+  npm install @heroui/react@beta framer-motion
+
+  //Create hero.ts
+
+  // Delete tailwind.config.js
+
+  // @hero.ts in globals.css file
+  ```
 
 - Components can be used in Next.js server components
+
+## Create basic layout
+
+- Pick a Navbar and a main area
+
+## [Bug of HeroUI Link](https://github.com/heroui-inc/heroui/issues/3572)
+
+- Link imports from '@heroui/react' actually reload the whole page instead of running as a single page application
+- There is no solution so far, just use Link from 'next/link', don't use Link from '@heroui/react'
+
+## [tabler as Icon library](https://tabler.io/icons)
+
+## HeroUI using next-themes package to handle dark and light mode
+
+```
+npm install next-themes
+```
+
+- next-themes saves the them in localstorage
+
+- When user launches the page, will see system theme first without toggling
+
+## [Background Generator](https://www.fffuel.co/)
