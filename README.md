@@ -118,3 +118,7 @@ npm install @t3-oss/env-nextjs zod
 
 - No build step needed: Load TS or ESM directly during runtime.
 - Set up in next.config.ts to validation env file in the beginning
+
+## [eslint-plugin-n](https://www.npmjs.com/package/eslint-plugin-n)
+
+- Prevent access process.env in the codebase

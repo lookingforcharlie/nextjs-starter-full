@@ -12,9 +12,11 @@ const compat = new FlatCompat({
 const eslintConfig = [
   ...compat.config({
     extends: ['next/core-web-vitals', 'next/typescript', 'prettier'],
+    plugins: ['n'],
     rules: {
       'prefer-arrow-callback': 'error', // Anonymous callback will always be arrow function
-      'prefer-template': 'error' // Use template literals instead of string concatenation
+      'prefer-template': 'error', // Use template literals instead of string concatenation
+      'n/no-process-env': 'error' // Prevent access process.env in the codebase
     }
   })
 ]

@@ -8,6 +8,7 @@ export const env = createEnv({
     NODE_ENV: z.enum(['development', 'production']),
     DATABASE_URL: z.string().url()
   },
+
   // throw an error if a variable is empty
   emptyStringAsUndefined: true,
   // If you're using Next.js < 13.4.4, you'll need to specify the runtimeEnv manually
@@ -16,5 +17,8 @@ export const env = createEnv({
   //   OPEN_AI_API_KEY: process.env.OPEN_AI_API_KEY,
   // },
   // For Next.js >= 13.4.4, you can just reference process.env:
+
+  // The only place where we can access process.env
+  // eslint-disable-next-line n/no-process-env
   experimental__runtimeEnv: process.env
 })
