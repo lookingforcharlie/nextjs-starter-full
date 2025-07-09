@@ -5,7 +5,6 @@ import Link from 'next/link'
 import React from 'react'
 
 import {
-  Button,
   Navbar,
   NavbarBrand,
   NavbarContent,
@@ -16,6 +15,7 @@ import {
 } from '@heroui/react'
 import { IconPackage } from '@tabler/icons-react'
 
+import { AuthButton } from './auth-button'
 import { ThemeSwitcher } from './theme-switcher'
 
 export default function AppNavbar() {
@@ -55,23 +55,21 @@ export default function AppNavbar() {
         ))}
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
-            Sign Up
-          </Button>
-        </NavbarItem>
         {/* /MARK: Theme Switcher */}
         <NavbarItem className="hidden sm:flex">
           <ThemeSwitcher />
         </NavbarItem>
+        <NavbarItem className="hidden sm:flex">
+          <AuthButton minimal={false} />
+        </NavbarItem>
       </NavbarContent>
+
+      {/* /MARK: menu items starts here */}
       <NavbarMenu>
         <NavbarMenuItem>
           <ThemeSwitcher />
         </NavbarMenuItem>
+
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link className="w-full" href={item.href as Route}>
@@ -79,6 +77,9 @@ export default function AppNavbar() {
             </Link>
           </NavbarMenuItem>
         ))}
+        <NavbarMenuItem>
+          <AuthButton />
+        </NavbarMenuItem>
       </NavbarMenu>
     </Navbar>
   )

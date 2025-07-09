@@ -66,6 +66,8 @@ npm install -D prettier prettier-plugin-tailwindcss
 
 - We don't need tailwind.config.js file no more in V4
 
+# -------------------------- Basic Stops Here -------------------------
+
 ## HeroUI
 
 - [How to work with Tailwind CSS V4](https://www.heroui.com/docs/guide/tailwind-v4)
@@ -122,3 +124,12 @@ npm install @t3-oss/env-nextjs zod
 ## [eslint-plugin-n](https://www.npmjs.com/package/eslint-plugin-n)
 
 - Prevent access process.env in the codebase
+
+## [Next Auth for authentication](https://next-auth.js.org/)
+
+- npm install next-auth
+- Set up an API route
+- Create Google OAuth in google console
+- [Add redirect uri](https://next-auth.js.org/providers/google)
+
+## Use Dropdown menu with Custom Trigger from HeroUI to create sign in and sign out menu
