@@ -14,23 +14,29 @@ import {
   NavbarMenuToggle
 } from '@heroui/react'
 import { IconPackage } from '@tabler/icons-react'
+import { useSession } from 'next-auth/react'
 
 import { AuthButton } from './auth-button'
 import { ThemeSwitcher } from './theme-switcher'
 
 export default function AppNavbar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
+  const { status } = useSession()
 
   const menuItems = [
     {
       label: 'Home',
       href: '/'
-    },
-    {
-      label: 'Profile',
-      href: '/profile'
     }
   ]
+
+  // User will see Profile link in the navbar only when they are signed in
+  if (status === 'authenticated') {
+    menuItems.push({
+      label: 'Profile',
+      href: '/profile'
+    })
+  }
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen}>

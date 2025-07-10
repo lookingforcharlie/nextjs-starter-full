@@ -66,7 +66,7 @@ npm install -D prettier prettier-plugin-tailwindcss
 
 - We don't need tailwind.config.js file no more in V4
 
-# -------------------------- Basic Stops Here -------------------------
+# --- Basic Stops Here ---
 
 ## HeroUI
 
@@ -132,4 +132,13 @@ npm install @t3-oss/env-nextjs zod
 - Create Google OAuth in google console
 - [Add redirect uri](https://next-auth.js.org/providers/google)
 
+## [Setup NextAuth when using Next.js app router](https://next-auth.js.org/configuration/initialization#route-handlers-app)
+
 ## Use Dropdown menu with Custom Trigger from HeroUI to create sign in and sign out menu
+
+## [We need to add NEXTAUTH_URL and NEXTAUTH_SECRET to use getServerSession function in server component](https://next-auth.js.org/configuration/options#environment-variables)
+
+- NEXTAUTH_URL and NEXTAUTH_SECRET for generating JWT
+- NEXTAUTH_URL needs to be set up a real url when deploy to cloud
+
+## [Using middleware from NextAuth to protect page](https://next-auth.js.org/configuration/nextjs#middleware)

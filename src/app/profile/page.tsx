@@ -1,12 +1,32 @@
-import { env } from '@/env/server'
+import { Card, CardBody, User } from '@heroui/react'
+import { getServerSession } from 'next-auth'
 
-export default function Profile() {
-  console.log(env.DATABASE_URL)
+import authOptions from '../../config/auth'
+
+// Server component you can use getServerSession to get the session
+export default async function Profile() {
+  // setup suspense boundary to show loading state
+
+  // simulate a delay to show profile page
+  // await new Promise((resolve) => setTimeout(resolve, 2000))
+
+  const session = await getServerSession(authOptions)
+  console.log('session', session)
+
   return (
     <div>
-      <h1>Profile in the app folder</h1>
-      <p>DATABASE_URL: {env.DATABASE_URL}</p>
-      <p>NODE_ENV: {env.NODE_ENV}</p>
+      <Card className="mx-auto mt-10 max-w-md">
+        <CardBody>
+          <User
+            name={session?.user?.name}
+            description={session?.user?.email}
+            avatarProps={{
+              showFallback: !session?.user?.image,
+              src: session?.user?.image || ''
+            }}
+          />
+        </CardBody>
+      </Card>
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 
 import AppNavbar from '../components/app-navbar'
 import Providers from '../components/providers'
@@ -27,7 +28,9 @@ export default function RootLayout({
           <AppNavbar />
           {/* Set up the background image to dark and light mode */}
           <main className="flex-grow overflow-auto bg-[url(/light-abstract.webp)] bg-cover dark:bg-[url(/dark-abstract.webp)]">
-            {children}
+            {/* With the Suspense, the shell of the application will be load before the children are loaded */}
+            <Suspense>{children}</Suspense>
+            {/* {children} */}
           </main>
         </Providers>
       </body>

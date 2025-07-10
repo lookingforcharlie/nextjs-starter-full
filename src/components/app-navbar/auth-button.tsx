@@ -13,17 +13,31 @@ import { signIn, signOut, useSession } from 'next-auth/react'
 // minimal is used to determine if it shows only 'Sign Out' button or a dropdown menu with more options
 // minimal will be called optionally from other components, set to true by default
 export function AuthButton({ minimal = true }: { minimal?: boolean }) {
-  const { data: session, status } = useSession()
+  const { data, status } = useSession()
+
+  // Force refresh the page after sign in, fix the issue of not showing the user image after sign in
+  // const router = useRouter()
+
+  // const handleSignIn = async () => {
+  //   await signIn('google')
+  //   router.refresh() // for Next.js 13+
+  // }
+
+  const signOutClick = () => {
+    signOut({
+      callbackUrl: '/'
+    })
+  }
 
   if (status === 'loading') {
-    return <CircularProgress />
+    return <CircularProgress aria-label="Loading authentication status" />
   }
 
   if (status === 'authenticated') {
     // When in the navbar menu with small screen, show only 'Sign Out' button
     if (minimal) {
       return (
-        <Button onPress={() => signOut()} color="danger" variant="ghost">
+        <Button onPress={signOutClick} color="danger" variant="ghost">
           Sign Out
         </Button>
       )
@@ -36,19 +50,23 @@ export function AuthButton({ minimal = true }: { minimal?: boolean }) {
             isBordered
             as="button"
             className="transition-transform"
-            showFallback={!session.user?.image}
+            showFallback={!data.user?.image}
             // src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-            src={session.user?.image || ''}
+            src={data.user?.image || ''}
             size="sm"
           />
         </DropdownTrigger>
         <DropdownMenu aria-label="Profile Actions" variant="flat">
-          <DropdownItem key="profile" className="h-14 gap-2">
+          <DropdownItem
+            key="profile"
+            className="h-14 gap-2"
+            textValue={`Signed in as ${data.user?.email}`}
+          >
             <p className="font-semibold">Signed in as</p>
-            <p className="font-semibold">{session.user?.email}</p>
+            <p className="font-semibold">{data.user?.email}</p>
           </DropdownItem>
           <DropdownItem key="settings">My Settings</DropdownItem>
-          <DropdownItem key="sign-out" color="danger" onPress={() => signOut()}>
+          <DropdownItem key="sign-out" color="danger" onPress={signOutClick}>
             Sign Out
           </DropdownItem>
         </DropdownMenu>
@@ -58,7 +76,15 @@ export function AuthButton({ minimal = true }: { minimal?: boolean }) {
 
   return (
     <>
-      <Button onPress={() => signIn('google')} color="danger" variant="ghost">
+      <Button
+        onPress={() =>
+          signIn('google', {
+            callbackUrl: '/profile' // specify the page to redirect to after sign in
+          })
+        }
+        color="danger"
+        variant="ghost"
+      >
         <IconBrandGoogle />
         Sign In
       </Button>
@@ -66,7 +92,7 @@ export function AuthButton({ minimal = true }: { minimal?: boolean }) {
   )
 }
 
-// This is how session looks like
+// This is how data looks like
 // {
 //   "user": {
 //       "name": "Char",
