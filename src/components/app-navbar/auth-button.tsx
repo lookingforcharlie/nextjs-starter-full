@@ -15,14 +15,6 @@ import { signIn, signOut, useSession } from 'next-auth/react'
 export function AuthButton({ minimal = true }: { minimal?: boolean }) {
   const { data, status } = useSession()
 
-  // Force refresh the page after sign in, fix the issue of not showing the user image after sign in
-  // const router = useRouter()
-
-  // const handleSignIn = async () => {
-  //   await signIn('google')
-  //   router.refresh() // for Next.js 13+
-  // }
-
   const signOutClick = () => {
     signOut({
       callbackUrl: '/'

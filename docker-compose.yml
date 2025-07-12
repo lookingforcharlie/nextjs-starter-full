@@ -1,0 +1,18 @@
+services:
+  db:
+    image: postgres:17.5
+    container_name: postgres-next-starter
+    ports:
+      - ${DB_PORT}:5432 # port mapping from host to container
+    environment:
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_DB=${DB_NAME}
+    volumes:
+      - ./docker_data/db:/var/lib/postgresql/data
+    restart: unless-stopped
+# /var/lib/postgresql/data: where the data in the container is stored, you can find in the doc: https://hub.docker.com/_/postgres
+# ./docker_data/db: we will map the data inside container to our local machine
+# do not push ./docker_data/db to git
+# $ docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres
+# docker-compose only looks for .env file instead of .env.local

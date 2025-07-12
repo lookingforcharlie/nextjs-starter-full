@@ -142,3 +142,28 @@ npm install @t3-oss/env-nextjs zod
 - NEXTAUTH_URL needs to be set up a real url when deploy to cloud
 
 ## [Using middleware from NextAuth to protect page](https://next-auth.js.org/configuration/nextjs#middleware)
+
+## [Using Drizzle as NextAuth.js Adapter to connect DB](https://authjs.dev/getting-started/adapters/drizzle)w
+
+- [Locally, we use Postgres.js as the driver of Drizzle to connect Postgres in Docker](https://orm.drizzle.team/docs/get-started-postgresql#postgresjs)
+
+```
+npm i drizzle-orm postgres
+npm i -D drizzle-kit
+```
+
+## Environment Variables for DB connection
+
+- Since we have docker for Postgres, we set up a separate environment variable for every part of connection string.
+
+## Create docker compose yml file for Postgres
+
+run
+
+```
+docker compose up
+or
+docker compose up -d
+```
+
+## Define the table and schema using Drizzle
