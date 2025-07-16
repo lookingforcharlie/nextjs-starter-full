@@ -6,8 +6,12 @@ import { env } from '../env/server'
 // Purpose of index.ts, just to export the drizzle connection
 // We will setup the migration in separate file
 
-const queryClient = postgres(env.DATABASE_URL)
-const db = drizzle({ client: queryClient })
+// set max: 1 only if we are migrating
+export const client = postgres(env.DATABASE_URL, {
+  max: env.DB_MIGRATING ? 1 : undefined
+})
+const db = drizzle({ client: client })
+
 // returns the number 1, it's commonly used to verify database connectivity\
 // database operations are asynchronous
 // const result = await db.execute('select 1')

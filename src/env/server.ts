@@ -1,5 +1,12 @@
 import { createEnv } from '@t3-oss/env-nextjs'
+import dotenv from 'dotenv'
+import { expand } from 'dotenv-expand'
 import { z } from 'zod'
+
+expand(dotenv.config())
+
+// eslint-disable-next-line n/no-process-env
+console.log('env.DATABASE_URL', process.env.DATABASE_URL)
 
 // createEnv loads the environment variables from the .env file
 // and validates them during runtime using the zod schema
@@ -15,7 +22,14 @@ export const env = createEnv({
     DB_USER: z.string(),
     DB_PASSWORD: z.string(),
     DB_NAME: z.string(),
-    DATABASE_URL: z.string().url()
+    DATABASE_URL: z.string().url(),
+    DB_MIGRATING: z
+      .string()
+      // only allow true or false
+      .refine((value) => value === 'true' || value === 'false')
+      // transform the string to a boolean, if it's 'true' then true, otherwise false
+      .transform((val) => val === 'true')
+      .optional()
   },
 
   // throw an error if a variable is empty

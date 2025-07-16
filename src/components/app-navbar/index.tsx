@@ -32,10 +32,16 @@ export default function AppNavbar() {
 
   // User will see Profile link in the navbar only when they are signed in
   if (status === 'authenticated') {
-    menuItems.push({
-      label: 'Profile',
-      href: '/profile'
-    })
+    menuItems.push(
+      {
+        label: 'Profile',
+        href: '/profile'
+      },
+      {
+        label: 'Guestbook',
+        href: '/guestbook'
+      }
+    )
   }
 
   return (

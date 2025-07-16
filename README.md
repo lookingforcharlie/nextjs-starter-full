@@ -167,3 +167,73 @@ docker compose up -d
 ```
 
 ## Define the table and schema using Drizzle
+
+- NextAuth has template schema of user, account and session tables
+
+```
+// We create schema and tables first, run:
+npx drizzle-kit generate
+// then migrate to database, run: (push or migrate? need to confirm )
+npx drizzle-kit push
+// You can check the table in real time, run:
+npx drizzle-kit studio
+
+// Or you can migrate everything to database directly without running npx drizzle-kit generate
+```
+
+## Install cross env package
+
+- In package.json script, "db:migrate": "DB_MIGRATING=true npx drizzle-kit migrate" only works in MacOS and linux
+- cross env makes it work on Windows OS
+
+```
+npm i -D cross-env
+```
+
+- change the script to "db:migrate": "cross-env DB_MIGRATING=true npx drizzle-kit migrate"
+
+## [Link the tables to NextAuth: setup the adapter](https://authjs.dev/getting-started/adapters/drizzle?framework=Next.js)
+
+```
+npm install @auth/drizzle-adapter
+```
+
+## [Database migration](https://orm.drizzle.team/docs/migrations)
+
+- Option 1: push db changes directly
+
+```
+// Update the schemas or tables, use push won't generate migration file
+npx drizzle-kit push
+```
+
+- Option 2: you can just delete migrations folder, generate and migrate
+
+```
+// generate SQL migration files
+npx drizzle-kit generate
+
+// apply them to the database
+npm run db:migrate
+```
+
+- Restart the studio to confirm the change
+
+```
+npx drizzle-kit studio
+// you will see schema or table changed
+```
+
+## At this point, redirect to /profile doesn't work
+
+- delete the middleware.ts file we created
+- Create a help function that will check to see are we logged in, and if not we will redirect the user and any page that needs t obe authenticated is always call that function at the top the component.
+
+## [npm package conform: form validation library for React](https://conform.guide/integration/nextjs)
+
+- Define schema first
+- Use the schema in the action
+
+## npm i drizzle-zod
+
+- drizzle-zod allows you pass in the drizzle table and give you back a zod schema
