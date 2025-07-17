@@ -21,6 +21,7 @@ export async function createGuestbookEntry(
 ) {
   await requireAuth()
   const submission = parseWithZod(formData, {
+    // The issue occurs because createInsertSchema from drizzle-zod generates schemas that don't properly implement the full Zod interface that Conform expects
     schema: InsertGuestbookEntrySchema
   })
 

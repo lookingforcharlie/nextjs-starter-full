@@ -237,3 +237,9 @@ npx drizzle-kit studio
 ## npm i drizzle-zod
 
 - drizzle-zod allows you pass in the drizzle table and give you back a zod schema
+
+## Drizzle migrations .sql files
+
+- Every time, I changed schema or table, after drizzle-kit generate and migrate, it will generate a .sql file
+- Consolidate those .sql files down to a single file will be neat before deploy it to production
+- By consolidating, just delete the migrations folder, and generate and migrate again
