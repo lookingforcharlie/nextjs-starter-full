@@ -27,6 +27,10 @@ export default function AppNavbar() {
     {
       label: 'Home',
       href: '/'
+    },
+    {
+      label: 'Examples',
+      href: '/examples'
     }
   ]
 

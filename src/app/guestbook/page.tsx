@@ -1,4 +1,5 @@
 import { Avatar, Card, CardBody, CardFooter, CardHeader } from '@heroui/react'
+import { IconTrash } from '@tabler/icons-react'
 import { desc } from 'drizzle-orm'
 
 import requireAuth from '@/utils/require-auth'
@@ -9,6 +10,7 @@ import GuestbookClient from './page.client'
 
 export default async function Guestbook() {
   await requireAuth()
+  // const [isFollowed, setIsFollowed] = useState(false)
   // db.query has all the schema interfaces, because we defined the schema in the schema/index.ts file
   const entries = await db.query.guestbookEntries.findMany({
     // order by createdAt in descending order
@@ -44,6 +46,8 @@ export default async function Guestbook() {
                     </h5>
                   </div>
                 </div>
+                {/* TODO: add delete function, user can only delete their own items */}
+                <IconTrash className="text-yellow-500" />
               </CardHeader>
               <CardBody className="text-small text-default-400 px-3 py-0">
                 <p>{entry.message}</p>
